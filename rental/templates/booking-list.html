@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <h1>Booking List</h1>
+  {% if bookings %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Customer Name</th>
+        <th>Car Category</th>
+        <th>Rental Date time</th>
+        <th>Return Date time</th>
+        <th>Pickup Mileage</th>
+        <th>Return Mileage</th>
+        <th>Total Amount</th>
+        <th>Return Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in bookings %}
+      <tr>
+        <td>{{booking.customer_name}}</td>
+        <td>{{ booking.car_category }}</td>
+        <td>{{ booking.rental_datetime }}</td>
+        <td>{{ booking.return_datetime }}</td>
+        <td>{{ booking.car_mileage_at_pickup }}</td>
+        <td>{{ booking.car_mileage_at_return }}</td>
+        <td>{{ booking.total_amount }}</td>
+        <td>
+            {% if not booking.car_mileage_at_return %}
+                <a class="nav-link" href="{% url 'rental:return_car' booking.id %}"
+                >Return Car</a>
+            
+            {% else %}
+                Available for booking
+            {% endif %}
+          
+        </td>
+        <!-- Add more table cells as per your Car model fields -->
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %} No Booking Available {% endif %}
+</div>
+{% endblock content %}

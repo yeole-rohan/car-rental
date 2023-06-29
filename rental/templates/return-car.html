@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h1>Return Car</h1>
+    <h2>Booking Number: {{ booking.booking_number }}</h2>
+    <p>Customer Name: {{ booking.customer_name }}</p>
+    <p>Car Category: {{ booking.car_category }}</p>
+    <p>Rental Start Date: {{ booking.rental_start_date }}</p>
+    <p>Rental End Date: {{ booking.rental_end_date }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock content %}
